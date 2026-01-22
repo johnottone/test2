@@ -175,7 +175,7 @@ downloadBtn.addEventListener('click', function() {
     const printWindow = window.open('', '_blank');
     
     if (!printWindow) {
-        alert('Please allow popups for this website to download PDF');
+        alert('Please allow popups to open the print dialog for PDF generation');
         return;
     }
     
@@ -352,8 +352,8 @@ markdownInput.addEventListener('input', debounce(function() {
 // Load content from localStorage
 window.addEventListener('DOMContentLoaded', function() {
     const savedContent = localStorage.getItem('markdownContent');
-    if (savedContent && markdownInput.value === markdownInput.getAttribute('placeholder')) {
-        // Only load saved content if the textarea has the default content
+    if (savedContent && !markdownInput.value) {
+        // Only load saved content if the textarea is empty
         if (confirm('Load previously saved content?')) {
             markdownInput.value = savedContent;
             updatePreview();

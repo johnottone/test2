@@ -104,8 +104,8 @@ class MarkdownParser {
         
         text = text.replace(/§§§CODEBLOCK(\d+)§§§/g, function(match, index) {
             let block = self.codeBlocks[parseInt(index)];
-            // Extract language and code
-            const codeMatch = block.match(/```(\w+)?\n?([\s\S]*?)```/);
+            // Extract language and code (supports hyphens and other chars in language names)
+            const codeMatch = block.match(/```([a-zA-Z0-9\-_+#.]+)?\n?([\s\S]*?)```/);
             if (codeMatch) {
                 const language = codeMatch[1] || '';
                 const code = codeMatch[2];
@@ -131,7 +131,7 @@ class MarkdownParser {
         // Restore inline code
         text = text.replace(/§§§INLINECODE(\d+)§§§/g, function(match, index) {
             const code = self.inlineCodes[parseInt(index)];
-            const codeContent = code.replace(/`([^`]+)`/, '$1');
+            const codeContent = code.replace(/`([^`]+)`/g, '$1');
             return `<code>${codeContent}</code>`;
         });
         
