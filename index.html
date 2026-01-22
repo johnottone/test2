@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown to PDF Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📄 Markdown to PDF Converter</h1>
+            <p class="subtitle">Convert your Markdown documents to PDF - No dependencies required!</p>
+        </header>
+
+        <div class="main-content">
+            <div class="editor-section">
+                <div class="toolbar">
+                    <button id="boldBtn" class="toolbar-btn" title="Bold (Ctrl+B)"><strong>B</strong></button>
+                    <button id="italicBtn" class="toolbar-btn" title="Italic (Ctrl+I)"><em>I</em></button>
+                    <button id="headingBtn" class="toolbar-btn" title="Heading">H1</button>
+                    <button id="linkBtn" class="toolbar-btn" title="Link">🔗</button>
+                    <button id="codeBtn" class="toolbar-btn" title="Code Block">&lt;/&gt;</button>
+                    <button id="listBtn" class="toolbar-btn" title="List">📝</button>
+                    <button id="quoteBtn" class="toolbar-btn" title="Quote">❝</button>
+                    <button id="tableBtn" class="toolbar-btn" title="Table">⊞</button>
+                </div>
+                <textarea id="markdownInput" placeholder="Enter your Markdown here...
+
+# Welcome to Markdown to PDF Converter!
+
+## Features
+- **Bold**, *italic*, and ~~strikethrough~~ text
+- Headers (H1-H6)
+- Lists (ordered and unordered)
+- Code blocks with syntax
+- Blockquotes
+- Links and images
+- Tables
+- Horizontal rules
+
+## Example
+
+Here's a simple example:
+
+```javascript
+function hello() {
+    console.log('Hello, World!');
+}
+```
+
+> This is a blockquote
+
+### Table Example
+
+| Feature | Supported |
+|---------|-----------|
+| Headers | ✓ |
+| Lists   | ✓ |
+| Code    | ✓ |
+
+---
+
+**Try it out!** Edit this text and see the live preview.
+"></textarea>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-toolbar">
+                    <button id="refreshBtn" class="btn btn-secondary">🔄 Refresh Preview</button>
+                    <button id="downloadBtn" class="btn btn-primary">⬇️ Download PDF</button>
+                </div>
+                <div id="preview" class="preview-content"></div>
+            </div>
+        </div>
+
+        <div class="options-section">
+            <h3>PDF Options</h3>
+            <div class="options-grid">
+                <label>
+                    <input type="checkbox" id="includeStyles" checked>
+                    Include custom styles
+                </label>
+                <label>
+                    <input type="checkbox" id="pageNumbers" checked>
+                    Add page numbers
+                </label>
+                <label>
+                    Paper Size:
+                    <select id="paperSize">
+                        <option value="A4">A4</option>
+                        <option value="Letter">Letter</option>
+                        <option value="Legal">Legal</option>
+                    </select>
+                </label>
+                <label>
+                    Theme:
+                    <select id="theme">
+                        <option value="default">Default</option>
+                        <option value="github">GitHub</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <footer>
+            <p>Built with HTML, CSS, and Vanilla JavaScript - No dependencies! 🚀</p>
+        </footer>
+    </div>
+
+    <!-- Print styles for PDF generation -->
+    <style id="printStyles">
+        @media print {
+            body {
+                margin: 0;
+                padding: 20mm;
+            }
+            .preview-content {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+            }
+            .preview-content pre {
+                page-break-inside: avoid;
+            }
+            .preview-content table {
+                page-break-inside: avoid;
+            }
+            .preview-content h1, .preview-content h2, .preview-content h3 {
+                page-break-after: avoid;
+            }
+            @page {
+                margin: 20mm;
+            }
+        }
+    </style>
+
+    <script src="markdown-parser.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
